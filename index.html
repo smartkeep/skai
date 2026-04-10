@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skai - Smartkeep</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--g:#1ec97f;--bg:#080f0c;--s:#142019;--b:rgba(30,201,127,0.12);--bb:rgba(30,201,127,0.28);--t:#e8f5ee;--td:rgba(232,245,238,0.55);--tf:rgba(232,245,238,0.28);--ub:#1e3328;--r:14px}
+html,body{height:100%;background:var(--bg);color:var(--t);font-family:Sora,sans-serif;overflow:hidden}
+.shell{display:flex;flex-direction:column;height:100vh;max-width:860px;margin:0 auto;padding:0 16px}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 0 16px;border-bottom:1px solid var(--b);flex-shrink:0}
+.logo{display:flex;align-items:center;gap:11px}
+.lm{width:34px;height:34px;background:var(--g);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.ln{font-size:.92rem;font-weight:600;display:block}.ls{font-size:.64rem;color:var(--g);display:block}
+.sp{display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--td);border:1px solid var(--b);border-radius:20px;padding:5px 12px}
+.sd{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 2.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.cb{display:flex;gap:8px;padding:12px 0;flex-shrink:0;overflow-x:auto;scrollbar-width:none}
+.cc{font-size:.69rem;color:var(--td);border:1px solid var(--b);border-radius:6px;padding:4px 10px;white-space:nowrap;cursor:pointer;background:var(--s)}
+.cc:hover,.cc.active{border-color:var(--bb);color:var(--g)}
+.msgs{flex:1;overflow-y:auto;padding:8px 0 20px;display:flex;flex-direction:column;gap:20px}
+.wlc{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center;padding:40px 20px;gap:16px}
+.wi{width:64px;height:64px;border:1px solid var(--bb);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--s)}
+.wlc h2{font-size:1.3rem;font-weight:600}.wlc p{font-size:.82rem;color:var(--td);max-width:420px;line-height:1.6}
+.sugs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;width:100%;max-width:560px;margin-top:8px}
+.sb{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:12px 14px;text-align:left;cursor:pointer;color:var(--td);font-size:.75rem;font-family:Sora,sans-serif;line-height:1.4}
+.sb:hover{border-color:var(--bb);color:var(--t)}
+.sl{display:block;font-size:.62rem;color:var(--g);margin-bottom:5px;text-transform:uppercase}
+.msg{display:flex;gap:12px;animation:fi .3s ease}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.msg.user{flex-direction:row-reverse}
+.av{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px}
+.msg.assistant .av{background:var(--g)}.msg.user .av{background:#1a2b20;border:1px solid var(--b);font-size:11px;font-weight:600;color:var(--g)}
+.bbl{max-width:78%;padding:13px 16px;border-radius:var(--r);font-size:.83rem;line-height:1.65}
+.msg.assistant .bbl{background:var(--s);border:1px solid var(--b);border-top-left-radius:4px}
+.msg.user .bbl{background:var(--ub);border:1px solid var(--bb);border-top-right-radius:4px}
+.bbl p{margin-bottom:8px}.bbl strong{color:var(--g)}
+.ti{display:flex;align-items:center;gap:5px;padding:4px 0}
+.td2{width:6px;height:6px;border-radius:50%;background:var(--g);opacity:.5;animation:tb 1.2s infinite}
+.td2:nth-child(2){animation-delay:.2s}.td2:nth-child(3){animation-delay:.4s}
+@keyframes tb{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+.ia{padding:14px 0 20px;flex-shrink:0}
+.ib{display:flex;align-items:flex-end;gap:10px;background:var(--s);border:1px solid var(--b);border-radius:var(--r);padding:10px 12px}
+.ib:focus-within{border-color:var(--bb)}
+textarea{flex:1;background:none;border:none;outline:none;color:var(--t);font-family:Sora,sans-serif;font-size:.83rem;line-height:1.5;resize:none;max-height:140px;min-height:24px}
+textarea::placeholder{color:var(--tf)}
+.sndb{width:34px;height:34px;border-radius:9px;background:var(--g);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#080f0c}
+.sndb:disabled{background:#1a2b20;cursor:not-allowed;color:var(--tf)}
+.sndb svg{width:16px;height:16px}
+.if{display:flex;align-items:center;justify-content:space-between;padding:7px 2px 0}
+.ih,.ic{font-size:.63rem;color:var(--tf)}
+.clr{background:none;border:1px solid var(--b);border-radius:6px;color:var(--td);font-size:.67rem;padding:3px 9px;cursor:pointer}
+.clr:hover{border-color:var(--bb);color:var(--t)}
+</style></head><body>
+<div class="shell">
+<header>
+<div class="logo"><div class="lm">🔮</div><div><span class="ln">Skai</span><span class="ls">by Smartkeep</span></div></div>
+<div style="display:flex;gap:8px;align-items:center"><button class="clr" onclick="clrChat()">clear</button><div class="sp"><div class="sd"></div>online</div></div>
+</header>
+<div class="cb">
+<div class="cc active" onclick="sCtx(this,'general')">🧠 General</div>
+<div class="cc" onclick="sCtx(this,'accounting')">📊 Contabilidad</div>
+<div class="cc" onclick="sCtx(this,'taxes')">🧾 Impuestos</div>
+<div class="cc" onclick="sCtx(this,'formation')">🏢 Formacion</div>
+<div class="cc" onclick="sCtx(this,'compliance')">📋 Compliance</div>
+<div class="cc" onclick="sCtx(this,'admin')">Admin</div>
+<div class="cc" onclick="sCtx(this,'client')">👤 Cliente</div>
+</div>
+<div class="msgs" id="msgs"><div class="wlc" id="wlc"><div class="wi">🔮</div><h2>Hola, soy Skai</h2><p>Asistente interno de Smartkeep para contabilidad, impuestos, formacion de empresas, compliance y operaciones.</p>
+<div class="sugs">
+<button class="sb" onclick="uSug(this)"><span class="sl">Compliance</span>Plazos Annual Report LLC en Florida</button>
+<button class="sb" onclick="uSug(this)"><span class="sl">Formacion</span>Documentos para LLC en Delaware</button>
+<button class="sb" onclick="uSug(this)"><span class="sl">Impuestos</span>Diferencias S-Corp vs C-Corp</button>
+<button class="sb" onclick="uSug(this)"><span class="sl">Contabilidad</span>Como hacer conciliacion bancaria</button>
+</div></div></div>
+<div class="ia"><div class="ib">
+<textarea id="inp" placeholder="Escribe tu consulta..." rows="1" onkeydown="hKey(event)" oninput="rsz(this);uCnt()"></textarea>
+<button class="sndb" id="sndb" onclick="send()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+</div><div class="if"><span class="ih">Enter para enviar</span><span class="ic" id="cc">0/2000</span></div></div>
+</div>
+<script>
+var CTX={general:"Eres el asistente interno de Smartkeep, firma de servicios para PYMEs en EE.UU.: formacion de empresas LLC y Corp, registered agent, virtual office, contabilidad, impuestos y disoluciones. Responde en espanol claro y profesional.",accounting:"Eres asistente de Smartkeep en contabilidad. Ayuda con bookkeeping, reconciliaciones, P&L, QuickBooks. Responde en espanol con precision.",taxes:"Eres asistente de Smartkeep en impuestos EE.UU. Ayuda con tax returns, ITIN, extensiones para LLC/S-Corp/C-Corp. Responde en espanol. Casos especificos requieren CPA.",formation:"Eres asistente de Smartkeep en formacion de empresas. Ayuda con LLC vs Corp, requisitos por estado Delaware Florida Wyoming, documentos y costos. Responde en espanol.",compliance:"Eres asistente de Smartkeep en compliance. Ayuda con Annual Reports, BOI reports, fechas limite por estado, reinstatements y multas. Responde en espanol.",admin:"Eres asistente de Smartkeep para admin y operaciones. Ayuda con procesos internos, workflows y organizacion. Responde en espanol.",client:"Eres asistente de Smartkeep para servicio al cliente. Ayuda a redactar comunicaciones profesionales y manejar situaciones con clientes. Responde en espanol."};
+var ctx="general",hist=[],loading=false;
+function sCtx(el,c){document.querySelectorAll(".cc").forEach(function(x){x.classList.remove("active")});el.classList.add("active");ctx=c;}
+function uSug(btn){var lbl=btn.querySelector(".sl");var t=btn.innerText.replace(lbl.innerText,"").trim();var inp=document.getElementById("inp");inp.value=t;rsz(inp);uCnt();send();}
+function rsz(el){el.style.height="auto";el.style.height=Math.min(el.scrollHeight,140)+"px";}
+function uCnt(){var v=document.getElementById("inp").value;document.getElementById("cc").textContent=v.length+"/2000";}
+function hKey(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();}}
+function clrChat(){hist=[];document.getElementById("msgs").innerHTML="<div class='wlc' id='wlc'><div class='wi'>🔮</div><h2>Chat reiniciado</h2></div>";}
+function addMsg(role,text){var w=document.getElementById("wlc");if(w)w.remove();var msgs=document.getElementById("msgs");var d=document.createElement("div");d.className="msg "+role;var av=document.createElement("div");av.className="av";av.textContent=role==="assistant"?"🔮":"TU";var b=document.createElement("div");b.className="bbl";b.innerHTML=fmt(text);d.appendChild(av);d.appendChild(b);msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
+function addTyping(){var w=document.getElementById("wlc");if(w)w.remove();var msgs=document.getElementById("msgs");var d=document.createElement("div");d.className="msg assistant";d.id="typing";var av=document.createElement("div");av.className="av";av.textContent="🔮";var b=document.createElement("div");b.className="bbl";b.innerHTML="<div class='ti'><div class='td2'></div><div class='td2'></div><div class='td2'></div></div>";d.appendChild(av);d.appendChild(b);msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
+function fmt(t){return"<p>"+t.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/`([^`]+)`/g,"<code>$1</code>").replace(/\n\n/g,"</p><p>").replace(/\n/g,"<br>")+"</p>";}
+async function send(){var inp=document.getElementById("inp");var text=inp.value.trim();if(!text||loading)return;loading=true;document.getElementById("sndb").disabled=true;inp.value="";inp.style.height="auto";uCnt();addMsg("user",text);hist.push({role:"user",content:text});addTyping();try{var r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:CTX[ctx],messages:hist})});var data=await r.json();var reply=data.content&&data.content[0]?data.content[0].text:"Sin respuesta.";var t2=document.getElementById("typing");if(t2)t2.remove();addMsg("assistant",reply);hist.push({role:"assistant",content:reply});}catch(e){var t2=document.getElementById("typing");if(t2)t2.remove();addMsg("assistant","Error de conexion. Intenta de nuevo.");}loading=false;document.getElementById("sndb").disabled=false;inp.focus();}
+</script>
+</body></html>
