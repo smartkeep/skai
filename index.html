@@ -3,95 +3,255 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skai - Smartkeep</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&display=swap" rel="stylesheet">
+<title>Skai — Smartkeep AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--g:#1ec97f;--bg:#080f0c;--s:#142019;--b:rgba(30,201,127,0.12);--bb:rgba(30,201,127,0.28);--t:#e8f5ee;--td:rgba(232,245,238,0.55);--tf:rgba(232,245,238,0.28);--ub:#1e3328;--r:14px}
-html,body{height:100%;background:var(--bg);color:var(--t);font-family:Sora,sans-serif;overflow:hidden}
-.shell{display:flex;flex-direction:column;height:100vh;max-width:860px;margin:0 auto;padding:0 16px}
-header{display:flex;align-items:center;justify-content:space-between;padding:20px 0 16px;border-bottom:1px solid var(--b);flex-shrink:0}
-.logo{display:flex;align-items:center;gap:11px}
-.lm{width:34px;height:34px;background:var(--g);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}
-.ln{font-size:.92rem;font-weight:600;display:block}.ls{font-size:.64rem;color:var(--g);display:block}
-.sp{display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--td);border:1px solid var(--b);border-radius:20px;padding:5px 12px}
-.sd{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 2.5s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.cb{display:flex;gap:8px;padding:12px 0;flex-shrink:0;overflow-x:auto;scrollbar-width:none}
-.cc{font-size:.69rem;color:var(--td);border:1px solid var(--b);border-radius:6px;padding:4px 10px;white-space:nowrap;cursor:pointer;background:var(--s)}
-.cc:hover,.cc.active{border-color:var(--bb);color:var(--g)}
-.msgs{flex:1;overflow-y:auto;padding:8px 0 20px;display:flex;flex-direction:column;gap:20px}
-.wlc{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center;padding:40px 20px;gap:16px}
-.wi{width:64px;height:64px;border:1px solid var(--bb);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--s)}
-.wlc h2{font-size:1.3rem;font-weight:600}.wlc p{font-size:.82rem;color:var(--td);max-width:420px;line-height:1.6}
-.sugs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;width:100%;max-width:560px;margin-top:8px}
-.sb{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:12px 14px;text-align:left;cursor:pointer;color:var(--td);font-size:.75rem;font-family:Sora,sans-serif;line-height:1.4}
-.sb:hover{border-color:var(--bb);color:var(--t)}
-.sl{display:block;font-size:.62rem;color:var(--g);margin-bottom:5px;text-transform:uppercase}
-.msg{display:flex;gap:12px;animation:fi .3s ease}
-@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.msg.user{flex-direction:row-reverse}
-.av{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px}
-.msg.assistant .av{background:var(--g)}.msg.user .av{background:#1a2b20;border:1px solid var(--b);font-size:11px;font-weight:600;color:var(--g)}
-.bbl{max-width:78%;padding:13px 16px;border-radius:var(--r);font-size:.83rem;line-height:1.65}
-.msg.assistant .bbl{background:var(--s);border:1px solid var(--b);border-top-left-radius:4px}
-.msg.user .bbl{background:var(--ub);border:1px solid var(--bb);border-top-right-radius:4px}
-.bbl p{margin-bottom:8px}.bbl strong{color:var(--g)}
-.ti{display:flex;align-items:center;gap:5px;padding:4px 0}
-.td2{width:6px;height:6px;border-radius:50%;background:var(--g);opacity:.5;animation:tb 1.2s infinite}
-.td2:nth-child(2){animation-delay:.2s}.td2:nth-child(3){animation-delay:.4s}
-@keyframes tb{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
-.ia{padding:14px 0 20px;flex-shrink:0}
-.ib{display:flex;align-items:flex-end;gap:10px;background:var(--s);border:1px solid var(--b);border-radius:var(--r);padding:10px 12px}
-.ib:focus-within{border-color:var(--bb)}
-textarea{flex:1;background:none;border:none;outline:none;color:var(--t);font-family:Sora,sans-serif;font-size:.83rem;line-height:1.5;resize:none;max-height:140px;min-height:24px}
-textarea::placeholder{color:var(--tf)}
-.sndb{width:34px;height:34px;border-radius:9px;background:var(--g);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#080f0c}
-.sndb:disabled{background:#1a2b20;cursor:not-allowed;color:var(--tf)}
-.sndb svg{width:16px;height:16px}
-.if{display:flex;align-items:center;justify-content:space-between;padding:7px 2px 0}
-.ih,.ic{font-size:.63rem;color:var(--tf)}
-.clr{background:none;border:1px solid var(--b);border-radius:6px;color:var(--td);font-size:.67rem;padding:3px 9px;cursor:pointer}
-.clr:hover{border-color:var(--bb);color:var(--t)}
-</style></head><body>
-<div class="shell">
-<header>
-<div class="logo"><div class="lm">🔮</div><div><span class="ln">Skai</span><span class="ls">by Smartkeep</span></div></div>
-<div style="display:flex;gap:8px;align-items:center"><button class="clr" onclick="clrChat()">clear</button><div class="sp"><div class="sd"></div>online</div></div>
-</header>
-<div class="cb">
-<div class="cc active" onclick="sCtx(this,'general')">🧠 General</div>
-<div class="cc" onclick="sCtx(this,'accounting')">📊 Contabilidad</div>
-<div class="cc" onclick="sCtx(this,'taxes')">🧾 Impuestos</div>
-<div class="cc" onclick="sCtx(this,'formation')">🏢 Formacion</div>
-<div class="cc" onclick="sCtx(this,'compliance')">📋 Compliance</div>
-<div class="cc" onclick="sCtx(this,'admin')">Admin</div>
-<div class="cc" onclick="sCtx(this,'client')">👤 Cliente</div>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0c0f14;--surface:#141820;--surface2:#1a1f2a;--border:#252b38;
+  --text:#e2e6ed;--text2:#8b93a5;--green:#1ec97f;--green2:#17a56a;
+  --green-glow:rgba(30,201,127,.12);--red:#e5534b;
+  --radius:12px;--font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--font)}
+
+/* ---- layout ---- */
+.app{display:flex;flex-direction:column;height:100vh;height:100dvh;max-width:800px;margin:0 auto}
+
+/* ---- header ---- */
+.header{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border);flex-shrink:0}
+.logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--green),var(--green2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;letter-spacing:-.5px}
+.header h1{font-size:16px;font-weight:600;letter-spacing:-.3px}
+.header h1 span{color:var(--text2);font-weight:400;font-size:13px;margin-left:6px}
+.btn-clear{margin-left:auto;background:none;border:1px solid var(--border);color:var(--text2);font-size:12px;padding:5px 12px;border-radius:8px;cursor:pointer;font-family:var(--font);transition:.2s}
+.btn-clear:hover{border-color:var(--red);color:var(--red)}
+
+/* ---- chips ---- */
+.chips{display:flex;gap:6px;padding:10px 18px;overflow-x:auto;flex-shrink:0;-webkit-overflow-scrolling:touch}
+.chips::-webkit-scrollbar{display:none}
+.chip{white-space:nowrap;padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text2);transition:.2s;user-select:none}
+.chip:hover{border-color:var(--green);color:var(--text)}
+.chip.active{background:var(--green-glow);border-color:var(--green);color:var(--green)}
+
+/* ---- messages ---- */
+.messages{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}
+.messages::-webkit-scrollbar{width:4px}
+.messages::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+
+.msg{max-width:85%;padding:12px 16px;border-radius:var(--radius);font-size:14px;line-height:1.6;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.msg.user{align-self:flex-end;background:var(--green);color:#0c0f14;border-bottom-right-radius:4px;font-weight:500}
+.msg.assistant{align-self:flex-start;background:var(--surface2);border:1px solid var(--border);border-bottom-left-radius:4px}
+
+/* markdown inside assistant msgs */
+.msg.assistant h1,.msg.assistant h2,.msg.assistant h3{margin:10px 0 4px;font-size:14px;font-weight:700;color:var(--green)}
+.msg.assistant ul,.msg.assistant ol{margin:4px 0 4px 18px}
+.msg.assistant li{margin:2px 0}
+.msg.assistant code{font-family:var(--mono);font-size:12.5px;background:rgba(255,255,255,.06);padding:1px 5px;border-radius:4px}
+.msg.assistant pre{background:rgba(0,0,0,.3);padding:10px;border-radius:8px;overflow-x:auto;margin:6px 0}
+.msg.assistant pre code{background:none;padding:0}
+.msg.assistant strong{color:var(--green)}
+.msg.assistant table{border-collapse:collapse;margin:6px 0;font-size:13px;width:100%}
+.msg.assistant th,.msg.assistant td{border:1px solid var(--border);padding:5px 8px;text-align:left}
+.msg.assistant th{background:rgba(255,255,255,.04);font-weight:600}
+.msg.assistant a{color:var(--green);text-decoration:underline}
+
+/* typing indicator */
+.typing{display:none;align-self:flex-start;padding:12px 18px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);border-bottom-left-radius:4px}
+.typing.show{display:flex;gap:5px;align-items:center}
+.typing span{width:6px;height:6px;border-radius:50%;background:var(--text2);animation:blink 1.4s infinite}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:.3}40%{opacity:1}}
+
+/* welcome */
+.welcome{text-align:center;padding:40px 20px;color:var(--text2)}
+.welcome .icon{font-size:42px;margin-bottom:12px}
+.welcome h2{font-size:18px;color:var(--text);margin-bottom:6px;font-weight:600}
+.welcome p{font-size:13px;line-height:1.5;max-width:380px;margin:0 auto}
+
+/* ---- input ---- */
+.input-area{padding:12px 18px 16px;border-top:1px solid var(--border);flex-shrink:0;display:flex;gap:8px;align-items:flex-end}
+.input-area textarea{flex:1;resize:none;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:var(--font);font-size:14px;padding:10px 14px;border-radius:var(--radius);outline:none;max-height:120px;line-height:1.5;transition:border .2s}
+.input-area textarea::placeholder{color:var(--text2)}
+.input-area textarea:focus{border-color:var(--green)}
+.btn-send{width:40px;height:40px;border:none;border-radius:10px;background:var(--green);color:#0c0f14;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;flex-shrink:0}
+.btn-send:hover{background:var(--green2)}
+.btn-send:disabled{opacity:.35;cursor:default}
+
+/* responsive */
+@media(max-width:500px){
+  .msg{max-width:92%}
+  .header h1 span{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">S</div>
+    <h1>Skai <span>Smartkeep AI</span></h1>
+    <button class="btn-clear" onclick="clearChat()" title="Limpiar chat">Limpiar</button>
+  </div>
+
+  <!-- Category chips -->
+  <div class="chips" id="chips">
+    <div class="chip active" data-cat="general">General</div>
+    <div class="chip" data-cat="contabilidad">Contabilidad</div>
+    <div class="chip" data-cat="impuestos">Impuestos</div>
+    <div class="chip" data-cat="formacion">Formación</div>
+    <div class="chip" data-cat="compliance">Compliance</div>
+    <div class="chip" data-cat="admin">Admin</div>
+    <div class="chip" data-cat="cliente">Cliente</div>
+  </div>
+
+  <!-- Messages -->
+  <div class="messages" id="messages">
+    <div class="welcome" id="welcome">
+      <div class="icon">⚡</div>
+      <h2>Hola, soy Skai</h2>
+      <p>Asistente AI interno de Smartkeep. Pregúntame sobre servicios, clientes, procedimientos, precios o cualquier tema operativo.</p>
+    </div>
+    <div class="typing" id="typing"><span></span><span></span><span></span></div>
+  </div>
+
+  <!-- Input -->
+  <div class="input-area">
+    <textarea id="input" rows="1" placeholder="Escribe tu pregunta..." autofocus></textarea>
+    <button class="btn-send" id="btnSend" onclick="send()">&#9654;</button>
+  </div>
 </div>
-<div class="msgs" id="msgs"><div class="wlc" id="wlc"><div class="wi">🔮</div><h2>Hola, soy Skai</h2><p>Asistente interno de Smartkeep para contabilidad, impuestos, formacion de empresas, compliance y operaciones.</p>
-<div class="sugs">
-<button class="sb" onclick="uSug(this)"><span class="sl">Compliance</span>Plazos Annual Report LLC en Florida</button>
-<button class="sb" onclick="uSug(this)"><span class="sl">Formacion</span>Documentos para LLC en Delaware</button>
-<button class="sb" onclick="uSug(this)"><span class="sl">Impuestos</span>Diferencias S-Corp vs C-Corp</button>
-<button class="sb" onclick="uSug(this)"><span class="sl">Contabilidad</span>Como hacer conciliacion bancaria</button>
-</div></div></div>
-<div class="ia"><div class="ib">
-<textarea id="inp" placeholder="Escribe tu consulta..." rows="1" onkeydown="hKey(event)" oninput="rsz(this);uCnt()"></textarea>
-<button class="sndb" id="sndb" onclick="send()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
-</div><div class="if"><span class="ih">Enter para enviar</span><span class="ic" id="cc">0/2000</span></div></div>
-</div>
+
+<!-- Minimal markdown parser (no deps) -->
 <script>
-var CTX={general:"Eres el asistente interno de Smartkeep, firma de servicios para PYMEs en EE.UU.: formacion de empresas LLC y Corp, registered agent, virtual office, contabilidad, impuestos y disoluciones. Responde en espanol claro y profesional.",accounting:"Eres asistente de Smartkeep en contabilidad. Ayuda con bookkeeping, reconciliaciones, P&L, QuickBooks. Responde en espanol con precision.",taxes:"Eres asistente de Smartkeep en impuestos EE.UU. Ayuda con tax returns, ITIN, extensiones para LLC/S-Corp/C-Corp. Responde en espanol. Casos especificos requieren CPA.",formation:"Eres asistente de Smartkeep en formacion de empresas. Ayuda con LLC vs Corp, requisitos por estado Delaware Florida Wyoming, documentos y costos. Responde en espanol.",compliance:"Eres asistente de Smartkeep en compliance. Ayuda con Annual Reports, BOI reports, fechas limite por estado, reinstatements y multas. Responde en espanol.",admin:"Eres asistente de Smartkeep para admin y operaciones. Ayuda con procesos internos, workflows y organizacion. Responde en espanol.",client:"Eres asistente de Smartkeep para servicio al cliente. Ayuda a redactar comunicaciones profesionales y manejar situaciones con clientes. Responde en espanol."};
-var ctx="general",hist=[],loading=false;
-function sCtx(el,c){document.querySelectorAll(".cc").forEach(function(x){x.classList.remove("active")});el.classList.add("active");ctx=c;}
-function uSug(btn){var lbl=btn.querySelector(".sl");var t=btn.innerText.replace(lbl.innerText,"").trim();var inp=document.getElementById("inp");inp.value=t;rsz(inp);uCnt();send();}
-function rsz(el){el.style.height="auto";el.style.height=Math.min(el.scrollHeight,140)+"px";}
-function uCnt(){var v=document.getElementById("inp").value;document.getElementById("cc").textContent=v.length+"/2000";}
-function hKey(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();}}
-function clrChat(){hist=[];document.getElementById("msgs").innerHTML="<div class='wlc' id='wlc'><div class='wi'>🔮</div><h2>Chat reiniciado</h2></div>";}
-function addMsg(role,text){var w=document.getElementById("wlc");if(w)w.remove();var msgs=document.getElementById("msgs");var d=document.createElement("div");d.className="msg "+role;var av=document.createElement("div");av.className="av";av.textContent=role==="assistant"?"🔮":"TU";var b=document.createElement("div");b.className="bbl";b.innerHTML=fmt(text);d.appendChild(av);d.appendChild(b);msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
-function addTyping(){var w=document.getElementById("wlc");if(w)w.remove();var msgs=document.getElementById("msgs");var d=document.createElement("div");d.className="msg assistant";d.id="typing";var av=document.createElement("div");av.className="av";av.textContent="🔮";var b=document.createElement("div");b.className="bbl";b.innerHTML="<div class='ti'><div class='td2'></div><div class='td2'></div><div class='td2'></div></div>";d.appendChild(av);d.appendChild(b);msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
-function fmt(t){return"<p>"+t.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/`([^`]+)`/g,"<code>$1</code>").replace(/\n\n/g,"</p><p>").replace(/\n/g,"<br>")+"</p>";}
-async function send(){var inp=document.getElementById("inp");var text=inp.value.trim();if(!text||loading)return;loading=true;document.getElementById("sndb").disabled=true;inp.value="";inp.style.height="auto";uCnt();addMsg("user",text);hist.push({role:"user",content:text});addTyping();try{var r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:CTX[ctx],messages:hist})});var data=await r.json();var reply=data.content&&data.content[0]?data.content[0].text:"Sin respuesta.";var t2=document.getElementById("typing");if(t2)t2.remove();addMsg("assistant",reply);hist.push({role:"assistant",content:reply});}catch(e){var t2=document.getElementById("typing");if(t2)t2.remove();addMsg("assistant","Error de conexion. Intenta de nuevo.");}loading=false;document.getElementById("sndb").disabled=false;inp.focus();}
+function md(t){
+  // code blocks
+  t=t.replace(/```(\w*)\n([\s\S]*?)```/g,(_,l,c)=>`<pre><code>${esc(c.trim())}</code></pre>`);
+  // inline code
+  t=t.replace(/`([^`]+)`/g,(_,c)=>`<code>${esc(c)}</code>`);
+  // headings
+  t=t.replace(/^### (.+)$/gm,'<h3>$1</h3>');
+  t=t.replace(/^## (.+)$/gm,'<h2>$1</h2>');
+  t=t.replace(/^# (.+)$/gm,'<h1>$1</h1>');
+  // bold / italic
+  t=t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  t=t.replace(/\*(.+?)\*/g,'<em>$1</em>');
+  // unordered list
+  t=t.replace(/^[-*] (.+)$/gm,'<li>$1</li>');
+  t=t.replace(/(<li>.*<\/li>\n?)+/g,m=>'<ul>'+m+'</ul>');
+  // ordered list
+  t=t.replace(/^\d+\. (.+)$/gm,'<li>$1</li>');
+  // links
+  t=t.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
+  // line breaks -> paragraphs
+  t=t.replace(/\n{2,}/g,'</p><p>');
+  t=t.replace(/\n/g,'<br>');
+  // simple table support
+  t=t.replace(/(<br>)?\|(.+)\|(<br>)?\|[-| :]+\|/g, (_, __, hdr) => {
+    const cols = hdr.split('|').map(c => `<th>${c.trim()}</th>`).join('');
+    return `<table><thead><tr>${cols}</tr></thead><tbody>`;
+  });
+  return '<p>'+t+'</p>';
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 </script>
-</body></html>
+
+<script>
+// ===================== CONFIG =====================
+// ⚠️  CHANGE THIS to your Cloudflare Worker URL after deploying:
+const WORKER_URL = "https://skai-worker.webdevelopment-194.workers.dev";
+// ==================================================
+
+let category = "general";
+let history = []; // {role, content}
+let busy = false;
+
+// ---- Chips ----
+document.getElementById("chips").addEventListener("click", e => {
+  const chip = e.target.closest(".chip");
+  if (!chip) return;
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+  chip.classList.add("active");
+  category = chip.dataset.cat;
+});
+
+// ---- Textarea auto-resize + Enter ----
+const input = document.getElementById("input");
+input.addEventListener("input", () => {
+  input.style.height = "auto";
+  input.style.height = Math.min(input.scrollHeight, 120) + "px";
+});
+input.addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+});
+
+// ---- Send ----
+async function send() {
+  const text = input.value.trim();
+  if (!text || busy) return;
+  busy = true;
+  document.getElementById("btnSend").disabled = true;
+
+  // hide welcome
+  const wel = document.getElementById("welcome");
+  if (wel) wel.style.display = "none";
+
+  addMsg("user", text);
+  history.push({ role: "user", content: text });
+  input.value = "";
+  input.style.height = "auto";
+
+  showTyping(true);
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: history, category }),
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    const reply = data.reply;
+    history.push({ role: "assistant", content: reply });
+    addMsg("assistant", reply);
+  } catch (err) {
+    addMsg("assistant", `⚠️ Error: ${err.message}. Verifica la conexión o intenta de nuevo.`);
+  }
+
+  showTyping(false);
+  busy = false;
+  document.getElementById("btnSend").disabled = false;
+  input.focus();
+}
+
+// ---- DOM helpers ----
+function addMsg(role, text) {
+  const container = document.getElementById("messages");
+  const typing = document.getElementById("typing");
+  const div = document.createElement("div");
+  div.className = `msg ${role}`;
+  div.innerHTML = role === "assistant" ? md(text) : esc(text).replace(/\n/g,"<br>");
+  container.insertBefore(div, typing);
+  container.scrollTop = container.scrollHeight;
+}
+
+function showTyping(on) {
+  document.getElementById("typing").classList.toggle("show", on);
+  const c = document.getElementById("messages");
+  c.scrollTop = c.scrollHeight;
+}
+
+function clearChat() {
+  history = [];
+  const container = document.getElementById("messages");
+  container.querySelectorAll(".msg").forEach(m => m.remove());
+  const wel = document.getElementById("welcome");
+  if (wel) wel.style.display = "";
+}
+</script>
+</body>
+</html>
